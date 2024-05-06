@@ -55,5 +55,19 @@ Habilitei todas as portas e IP's a acesrem o RDS mas ainda não consegui.
 &emsp;&emsp;Ainda que não consegui conectar, a query para calcular o número médio de pacientes transportados por veículo por mês seria:
 
 ```
+SELECT
+    YEAR(data) AS Ano,
+    MONTH(data) AS Mes,
+    COUNT(DISTINCT id_paciente) / COUNT(DISTINCT id_transporte) AS Media_Pacientes_Por_Veiculo
+FROM
+    Transporte_Pacientes
+GROUP BY
+    YEAR(data),
+    MONTH(data);
 
 ```
+
+- YEAR(data) e MONTH(data): Selecionam o ano e o mês do campo data para agrupar os resultados.
+- COUNT(DISTINCT id_paciente) / COUNT(DISTINCT id_transporte): Calcula a média de pacientes distintos transportados por veículo, dividindo o número total de pacientes únicos pelo número total de transportes únicos no mesmo mês e ano.
+- FROM Transporte_Pacientes: Indica que os dados são retirados da tabela Transporte_Pacientes.
+- GROUP BY YEAR(data), MONTH(data): Agrupa os resultados por ano e mês para calcular a média para cada combinação de mês e ano, permitindo uma análise mensal da eficiência do transporte.
